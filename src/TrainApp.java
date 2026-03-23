@@ -1,30 +1,27 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TrainApp {
 
     public static void main(String[] args) {
 
-        System.out.println("=== Train Consist Management App ===");
+        System.out.println("=== UC3 Track Unique Bogie Types ===");
 
-        List<String> passengerBogies = new ArrayList<>();
+        Set<String> bogieTypes = new HashSet<>();
 
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        bogieTypes.add("Sleeper");
+        bogieTypes.add("AC Chair");
+        bogieTypes.add("First Class");
+        bogieTypes.add("Sleeper");
+        bogieTypes.add("AC Chair");
 
-        System.out.println("Passenger bogies after addition:");
-        System.out.println(passengerBogies);
+        System.out.println("After Adding Bogie Types:");
+        System.out.println("Passenger Bogies: " + bogieTypes);
 
-        passengerBogies.remove("AC Chair");
+        System.out.println("Adding duplicate bogies (Sleeper, AC Chair) ignored automatically...");
 
-        System.out.println("After removing AC Chair:");
-        System.out.println(passengerBogies);
+        System.out.println("Final Train Passenger Consist: " + bogieTypes);
 
-        boolean exists = passengerBogies.contains("Sleeper");
-        System.out.println("Is Sleeper present? " + exists);
-
-        System.out.println("Final passenger bogie list:");
-        System.out.println(passengerBogies);
+        System.out.println("UC3 operations completed successfully...");
     }
 }

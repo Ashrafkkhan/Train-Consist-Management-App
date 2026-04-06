@@ -1,19 +1,13 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 class Bogie {
     int id;
-    String type;
-    String cargo;
+    int capacity;
 
-    public Bogie(int id, String type, String cargo) {
+    public Bogie(int id, int capacity) {
         this.id = id;
-        this.type = type;
-        this.cargo = cargo;
-    }
-
-    @Override
-    public String toString() {
-        return "Bogie ID: " + id + ", Type: " + type + ", Cargo: " + cargo;
+        this.capacity = capacity;
     }
 }
 
@@ -22,21 +16,32 @@ public class TrainConsistApp {
     public static void main(String[] args) {
 
         List<Bogie> bogies = new ArrayList<>();
-        bogies.add(new Bogie(1, "Cylindrical", "Petroleum"));
-        bogies.add(new Bogie(2, "Box", "Coal"));
-        bogies.add(new Bogie(3, "Cylindrical", "Petroleum"));
-        bogies.add(new Bogie(4, "Flatbed", "Steel"));
-
-        boolean isSafe = bogies.stream()
-                .allMatch(b ->
-                        !b.type.equals("Cylindrical") ||
-                                b.cargo.equals("Petroleum")
-                );
-
-        if (isSafe) {
-            System.out.println("Train is SAFETY COMPLIANT ✅");
-        } else {
-            System.out.println("Train is NOT SAFE ❌");
+        for (int i = 1; i <= 100000; i++) {
+            bogies.add(new Bogie(i, (i % 100) + 1));
         }
+
+        long startLoop = System.nanoTime();
+
+        List<Bogie> loopResult = new ArrayList<>();
+        for (Bogie b : bogies) {
+            if (b.capacity > 60) {
+                loopResult.add(b);
+            }
+        }
+
+        long endLoop = System.nanoTime();
+        long loopTime = endLoop - startLoop;
+
+        long startStream = System.nanoTime();
+
+        List<Bogie> streamResult = bogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+
+        long endStream = System.nanoTime();
+        long streamTime = endStream - startStream;
+
+        System.out.println("Loop Time (ns): " + loopTime);
+        System.out.println("Stream Time (ns): " + streamTime);
     }
 }

@@ -34,9 +34,9 @@ public class TrainConsistApp {
                 );
 
         if (isSafe) {
-            System.out.println("Train is SAFETY COMPLIANT ");
+            System.out.println("Train is SAFETY COMPLIANT ✅");
         } else {
-            System.out.println("Train is NOT SAFE ");
+            System.out.println("Train is NOT SAFE ❌");
         }
     }
 }

@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 class Bogie {
     int id;
@@ -10,11 +9,6 @@ class Bogie {
         this.id = id;
         this.capacity = capacity;
         this.type = type;
-    }
-
-    @Override
-    public String toString() {
-        return "Bogie ID: " + id + ", Capacity: " + capacity + ", Type: " + type;
     }
 }
 
@@ -29,13 +23,10 @@ public class TrainConsistApp {
         bogies.add(new Bogie(4, 65, "Passenger"));
         bogies.add(new Bogie(5, 80, "Cargo"));
 
-        Map<String, List<Bogie>> groupedBogies = bogies.stream()
-                .collect(Collectors.groupingBy(b -> b.type));
+        int totalSeats = bogies.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
 
-        System.out.println("Grouped Bogies:");
-        groupedBogies.forEach((type, list) -> {
-            System.out.println("\nType: " + type);
-            list.forEach(System.out::println);
-        });
+        System.out.println("Total Seating Capacity: " + totalSeats);
     }
 }

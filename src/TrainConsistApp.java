@@ -7,7 +7,6 @@ public class TrainConsistApp {
 
         while (left <= right) {
             int mid = (left + right) / 2;
-
             int result = arr[mid].compareTo(key);
 
             if (result == 0) {
@@ -31,6 +30,10 @@ public class TrainConsistApp {
         sc.nextLine();
 
         String[] bogieIds = new String[n];
+
+        if (bogieIds.length == 0) {
+            throw new IllegalStateException("Cannot perform search: Train has no bogies.");
+        }
 
         System.out.println("Enter bogie IDs:");
 

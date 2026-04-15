@@ -10,20 +10,29 @@ public class TrainConsistApp {
         int n = sc.nextInt();
         sc.nextLine();
 
-        String[] bogieTypes = new String[n];
+        String[] bogieIds = new String[n];
 
-        System.out.println("Enter bogie type names:");
+        System.out.println("Enter bogie IDs:");
 
         for (int i = 0; i < n; i++) {
-            bogieTypes[i] = sc.nextLine();
+            bogieIds[i] = sc.nextLine();
         }
 
-        Arrays.sort(bogieTypes);
+        System.out.print("Enter bogie ID to search: ");
+        String key = sc.nextLine();
 
-        System.out.println("\nSorted Bogie Names:");
+        boolean found = false;
 
-        for (String type : bogieTypes) {
-            System.out.println(type);
+        for (int i = 0; i < n; i++) {
+            if (bogieIds[i].equals(key)) {
+                System.out.println("Bogie found at position: " + i);
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Bogie not found");
         }
     }
 }

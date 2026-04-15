@@ -2,6 +2,26 @@ import java.util.*;
 
 public class TrainConsistApp {
 
+    public static int binarySearch(String[] arr, String key) {
+        int left = 0, right = arr.length - 1;
+
+        while (left <= right) {
+            int mid = (left + right) / 2;
+
+            int result = arr[mid].compareTo(key);
+
+            if (result == 0) {
+                return mid;
+            } else if (result < 0) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -18,20 +38,16 @@ public class TrainConsistApp {
             bogieIds[i] = sc.nextLine();
         }
 
+        Arrays.sort(bogieIds);
+
         System.out.print("Enter bogie ID to search: ");
         String key = sc.nextLine();
 
-        boolean found = false;
+        int index = binarySearch(bogieIds, key);
 
-        for (int i = 0; i < n; i++) {
-            if (bogieIds[i].equals(key)) {
-                System.out.println("Bogie found at position: " + i);
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
+        if (index != -1) {
+            System.out.println("Bogie found at position: " + index);
+        } else {
             System.out.println("Bogie not found");
         }
     }

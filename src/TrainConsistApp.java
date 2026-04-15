@@ -2,43 +2,28 @@ import java.util.*;
 
 public class TrainConsistApp {
 
-    public static void bubbleSort(int[] arr) {
-        int n = arr.length;
-
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-
-                if (arr[j] > arr[j + 1]) {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
-
-            }
-        }
-    }
-
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter number of passenger bogies: ");
+        System.out.print("Enter number of bogies: ");
         int n = sc.nextInt();
+        sc.nextLine();
 
-        int[] capacities = new int[n];
+        String[] bogieTypes = new String[n];
 
-        System.out.println("Enter capacities:");
+        System.out.println("Enter bogie type names:");
 
         for (int i = 0; i < n; i++) {
-            capacities[i] = sc.nextInt();
+            bogieTypes[i] = sc.nextLine();
         }
 
-        bubbleSort(capacities);
+        Arrays.sort(bogieTypes);
 
-        System.out.println("Sorted Capacities:");
+        System.out.println("\nSorted Bogie Names:");
 
-        for (int cap : capacities) {
-            System.out.print(cap + " ");
+        for (String type : bogieTypes) {
+            System.out.println(type);
         }
     }
 }

@@ -1,73 +1,44 @@
 import java.util.*;
 
-class InvalidCapacityException extends Exception {
-    public InvalidCapacityException(String message) {
-        super(message);
-    }
-}
-
-class UnsafeCargoException extends Exception {
-    public UnsafeCargoException(String message) {
-        super(message);
-    }
-}
-
-class Bogie {
-    int id;
-    int capacity;
-    String type;
-    String cargo;
-
-    public Bogie(int id, int capacity, String type) throws InvalidCapacityException {
-        if (capacity <= 0) {
-            throw new InvalidCapacityException("Capacity must be greater than 0!");
-        }
-        this.id = id;
-        this.capacity = capacity;
-        this.type = type;
-    }
-
-    public void assignCargo(String cargoType) throws UnsafeCargoException {
-        if (type.equalsIgnoreCase("Passenger") && cargoType.equalsIgnoreCase("Petroleum")) {
-            throw new UnsafeCargoException("Cannot assign petroleum to passenger bogie!");
-        }
-        this.cargo = cargoType;
-        System.out.println("Cargo assigned successfully to Bogie " + id);
-    }
-
-    @Override
-    public String toString() {
-        return "Bogie ID: " + id + ", Capacity: " + capacity +
-               ", Type: " + type + ", Cargo: " + (cargo == null ? "None" : cargo);
-    }
-}
-
 public class TrainConsistApp {
+
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+
+            }
+        }
+    }
 
     public static void main(String[] args) {
 
-        List<Bogie> bogies = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
 
-        try {
-            bogies.add(new Bogie(1, 60, "Passenger"));
-            bogies.add(new Bogie(2, 80, "Cargo"));
-        } catch (InvalidCapacityException e) {
-            System.out.println("Creation Error: " + e.getMessage());
+        System.out.print("Enter number of passenger bogies: ");
+        int n = sc.nextInt();
+
+        int[] capacities = new int[n];
+
+        System.out.println("Enter capacities:");
+
+        for (int i = 0; i < n; i++) {
+            capacities[i] = sc.nextInt();
         }
 
-        System.out.println("\n--- Assigning Cargo ---");
+        bubbleSort(capacities);
 
-        for (Bogie b : bogies) {
-            try {
-                b.assignCargo("Petroleum");
-            } catch (UnsafeCargoException e) {
-                System.out.println("Runtime Error: " + e.getMessage());
-            } finally {
-                System.out.println("Checked Bogie ID: " + b.id);
-            }
+        System.out.println("Sorted Capacities:");
+
+        for (int cap : capacities) {
+            System.out.print(cap + " ");
         }
-
-        System.out.println("\nFinal Bogie List:");
-        bogies.forEach(System.out::println);
     }
 }
